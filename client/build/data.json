@@ -1,0 +1,12 @@
+{
+    "en": {
+        "Map.address": "Address",
+        "Map.latitude": "Latitude",
+        "Map.longitude": "Longitude",
+        "Common.addlocation": "Add Location",
+        "Common.add": "Add",
+        "Common.edit": "edit",
+        "Common.delete": "delete",
+        "Common.update": "Update"
+    }
+}
