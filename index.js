@@ -1,7 +1,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const {mongoSET, geocodingAPI} = require('./config/dev')
+const { mongoSET, geocodingAPI } = require('./config/dev')
 const { MongoClient, ObjectID, ObjectId } = require('mongodb');
 const path = require('path');
 const app = express();
@@ -10,27 +10,28 @@ const collectionName = mongoSET.split("#")[1];
 
 app.use(bodyParser.json());
 app.post('/api/add', (req, res) => {
-    try{
-    let query = req.body;
-    //console.log(query);
-    MongoClient.connect(mongoURI, { 'useNewUrlParser': true }, (err, client) => {
-        if (err) throw err;
-        let dbo = client.db();
-        let oid = new ObjectID();
-        let payload = { _id: oid, address: query.address, lat: query.lat, lng: query.lng};
-        dbo.collection(collectionName).insertOne(payload, (err, result) => {
-            if (!err) {
-                res.status(200).send({ "success": true, response: payload })
-            } else {
-                res.status(500).send({ "success": false })
-            }
-            client.close();
-        });
-    })
-}catch(e){
-    //console.log(e);
-}
+    try {
+        let query = req.body;
+        //console.log(query);
+        MongoClient.connect(mongoURI, { 'useNewUrlParser': true }, (err, client) => {
+            if (err) throw err;
+            let dbo = client.db();
+            let oid = new ObjectID();
+            let payload = { _id: oid, address: query.address, lat: query.lat, lng: query.lng };
+            dbo.collection(collectionName).insertOne(payload, (err, result) => {
+                if (!err) {
+                    res.status(200).send({ "success": true, response: payload })
+                } else {
+                    res.status(500).send({ "success": false })
+                }
+                client.close();
+            });
+        })
+    } catch (e) {
+        //console.log(e);
+    }
 })
+
 
 
 app.post('/api/update', (req, res) => {
